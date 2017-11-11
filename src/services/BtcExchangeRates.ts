@@ -1,20 +1,25 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 import {of} from 'rxjs/observable/of';
-import {catchError, map, tap} from 'rxjs/operators';
-import {toString as _toString} from 'lodash';
+import {catchError, tap} from 'rxjs/operators';
+import 'rxjs/add/operator/map'
+import { toString as _toString } from 'lodash';
 
 @Injectable()
-export class BtcExchangeRates {
+export default class BtcExchangeRates {
   private BASE_URL = 'https://blockchain.info/tobtc';
 
   constructor(private http: HttpClient,) {}
 
   getUsdToBtc(usdPrice: number) {
+    let params = new HttpParams();
+    params = params.append('currency', 'USD');
+    params = params.append('value', `${usdPrice}`);
+
     return this.http.get(this.BASE_URL, {
-      params: {currency: 'USD', value: usdPrice}
+      params
     })
       .map(_toString)
       .pipe(

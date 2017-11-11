@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import BtcExchangeRates from '../../services/BtcExchangeRates';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +8,23 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent implements OnInit {
+  status: Object;
+  usdPrice: string = '10';
+  btcPrice: string;
 
-  constructor() { }
+  constructor(
+    private BtcExchangeRatesService: BtcExchangeRates,
+  ) {
+
+  }
 
   ngOnInit() {
+    this.convertUsdToBtc();
+  }
+
+  convertUsdToBtc() {
+    this.BtcExchangeRatesService.getUsdToBtc(parseInt(this.usdPrice, 10))
+      .subscribe(res => this.btcPrice = res);
   }
 
 }

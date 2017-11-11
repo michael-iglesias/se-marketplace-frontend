@@ -1,14 +1,19 @@
 @import "variables";
 
-@import
-'~bootstrap/scss/functions',
-'~bootstrap/scss/variables',
-'~bootstrap/scss/mixins',
-'~bootstrap/scss/print',
-'~bootstrap/scss/reboot',
-'~bootstrap/scss/type';
+@import '~bootstrap/dist/css/bootstrap.min.css';
 
+.add-top {
+  margin-top: 15px;
+}
 
-body {
-  background-color: lightblue;
+.add-bottom {
+  margin-bottom: 15px;
+}
+
+.add-top-less {
+  margin-top: 5px;
+}
+
+.add-bottom-less {
+  margin-bottom: 5px;
 }
